@@ -1,0 +1,18 @@
+Hi Administrator,
+
+<%= @user.full_name %> has <%= @verb %> his finance plan.
+
+User Details:
+Mobile: <%= @user.mobile %>
+Email: <%= @user.email %>
+
+New Plan Details:
+Name: <%= @new_plan.name %>
+Description: <%= @new_plan.description %>
+
+<% if @old_plan %>
+Old Plan Details:
+Name: <%= @old_plan.name %>
+Description: <%= @old_plan.description %>
+<% end %>
+

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h2>Hi Administrator</h2>
+    <h2><%= @user.full_name %> has sent a message through contact form.</h2>
+    <table>
+      <tr>
+        <td>Name:</td>
+        <td><%= @user.full_name %></td>
+      </tr>
+      <tr>
+        <td>Mobile:</td>
+        <td><%= @user.mobile %></td>
+      </tr>
+      <tr>
+        <td>Email:</td>
+        <td><%= @user.email %></td>
+      </tr>
+      <tr>
+        <td>Department:</td>
+        <td><%= @dept %></td>
+      </tr>
+      <tr>
+        <td>Subject:</td>
+        <td><%= @subject %></td>
+      </tr>
+      <tr>
+        <td>Content:</td>
+        <td><%= @content.gsub("\n","<br/>").html_safe %></td>
+      </tr>
+    </table>
+  </body>
+</html>

@@ -1,0 +1,57 @@
+<div class="row">
+  <div class="col-md-1"></div>
+  <div class="col-md-5">
+    <h2>Office Location</h2>
+    <div class="alert alert-info">
+      <strong>Address:</strong><br/>
+      Axtrion Capital,
+      48 Dover Street,
+      Mayfair, London
+      W1S 4FF, UK
+    </div>
+    <h4>Map</h4>
+    <div class="maps" id="google_map"></div>
+    <script type="text/javascript">
+      function initMap() {
+        var uluru = {lat: 51.507731, lng: -0.1416510};
+        var map = new google.maps.Map(document.getElementById('google_map'), {
+          zoom: 17,
+          center: uluru
+        });
+        var marker = new google.maps.Marker({
+          position: uluru,
+          map: map
+        });
+      }
+    </script>
+    <script type="text/javascript" async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDyahISGfMy2lpa3hKD516k8XWLUmkVlbo&callback=initMap">
+    </script>
+  </div>
+  <div class="col-md-5">
+    <h2>Contact Form</h2>
+    <div class="well">
+      Somebody from our office will contact you with 2 business days. 
+    </div>
+    <%= form_tag(site_send_contact_mailer_path, method: :post) do |f| %>
+      <div class="form-group">
+        <label>Select Department:</label>
+        <select name="mailer[dept]" class="form-control">
+          <option>Accounts Manager</option>
+          <option>Sales &amp; Marketing</option>
+          <option>Finance</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Subject:</label>
+        <input type="text" name="mailer[subject]" class="form-control"></input>
+      </div>
+      <div class="form-group">
+        <label>Message:</label>
+        <textarea name="mailer[body]" class="form-control" rows="15"></textarea>
+      </div>
+      <div class="form-group">
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </div>
+    <% end %>
+  </div>
+</div>

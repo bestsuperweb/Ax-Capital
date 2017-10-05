@@ -1,0 +1,158 @@
+<div class="row">
+  <div class="col-md-4"></div>
+  <div class="col-md-4">
+    <h2>Edit User Profile</h2>
+    <%= label_tag "Profile Completeness: " %>
+    <div class="progress">
+      <div class="progress-bar progress-bar-success" role="progressbar"
+        style="width:<%= user.profile_completeness %>%">
+        <%=user.profile_completeness%>%
+      </div>
+    </div>
+  </div>
+</div>
+<br/>
+
+<div class="row trading-tab-view">
+  <div class="col-md-3"></div>
+  <div class="col-md-6">
+    <%= form_for(setup_user(user), url: user_path(user), html: { method: :put }) do |f| %>
+      <ul class="nav nav-pills">
+        <li class="active">
+          <a href="#1b" data-toggle="tab">Profile</a>
+        </li>
+        <li>
+          <a href="#2b" data-toggle="tab">General</a>
+        </li>
+        <li>
+          <a href="#3b" data-toggle="tab">Address</a>
+        </li>
+        <li>
+          <a href="#4b" data-toggle="tab">Security</a>
+        </li>
+        <li>
+          <a href="#5b" data-toggle="tab">Plan</a>
+        </li>
+        <li>
+          <a href="#6b" data-toggle="tab">Admin</a>
+        </li>
+      </ul>
+
+      <div class="tab-content clearfix simple_border">
+        <div class="tab-pane active" id="1b">
+          <div>
+            <div class="field form-group">
+              <%= f.label :mobile %><br />
+              <%= f.number_field :mobile, class: "form-control" %>
+            </div>
+            <div class="field form-group">
+              <%= f.label :email %><br />
+              <%= f.email_field :email, class: "form-control" %>
+            </div>
+          </div>
+        </div>
+        <div class="tab-pane" id="2b">
+          <div>
+            <%= f.fields_for :gen_info do |f_gen_info| %>
+              <div class="field form-group">
+                <%= f_gen_info.label :first_name %><br />
+                <%= f_gen_info.text_field :first_name, class: "form-control" %>
+              </div>
+              <div class="field form-group">
+                <%= f_gen_info.label :last_name %><br />
+                <%= f_gen_info.text_field :last_name, class: "form-control" %>
+              </div>
+              <div class="field form-group">
+                <%= f_gen_info.label :date_of_birth %><br />
+                <div class='input-group datetimepicker' id='datetimepicker1'>
+                  <%= f_gen_info.text_field :date_of_birth, placeholder:"YYYY-MM-DD", class: "form-control" %>
+                  <span class="input-group-addon">
+                    <span class="glyphicon glyphicon-calendar"></span>
+                  </span>
+                </div>
+              </div>
+              <div class="field form-group">
+                <%= f_gen_info.check_box :uk_resident %>
+                <%= f_gen_info.label "I am a United Kingdom Resident" %>
+              </div>
+            <% end %>
+          </div>
+        </div>
+        <div class="tab-pane" id="3b">
+          <div>
+            <%= f.fields_for :address do |f_address| %>
+              <div class="field form-group">
+                <%= f_address.label :address %><br />
+                <%= f_address.text_field :address_line, class: "form-control" %>
+              </div>
+              <div class="field form-group">
+                <%= f_address.label :city %><br />
+                <%= f_address.text_field :city, class: "form-control" %>
+              </div>
+              <div class="field form-group">
+                <%= f_address.label :state %><br />
+                <%= f_address.text_field :state, class: "form-control" %>
+              </div>
+              <div class="field form-group">
+                <%= f_address.label :zip %><br />
+                <%= f_address.text_field :zip, class: "form-control" %>
+              </div>
+            <% end %>
+          </div>
+        </div>
+        <div class="tab-pane" id="4b">
+          <div>
+            <%= f.radio_button :security_setting, "security_email" %>
+            <%= f.label "Send security token to email (less secure)" %><br/>
+            <%= f.radio_button :security_setting, "security_mobile" %>
+            <%= f.label "Send security token to mobile (recommended)" %><br/>
+            <div class="field form-group">
+              <%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
+              <%= f.password_field :password, autocomplete: "off",
+                class: "form-control", type: "password", "data-toggle": "password" %>
+              <% if @minimum_password_length %>
+                <br />
+                <em><%= @minimum_password_length %> characters minimum</em>
+              <% end %>
+            </div>
+            <div class="field form-group">
+              <%= f.label :password_confirmation %><br/>
+              <%= f.password_field :password_confirmation, autocomplete: "off",
+                class: "form-control", type: "password", "data-toggle": "password" %>
+            </div>
+          </div>
+        </div>
+        <div class="tab-pane" id="5b">
+          <div class="panel-body">
+            <%= f.fields_for :finance do |f_finance| %>
+              <%= f_finance.collection_radio_buttons :finance_plan_id, FinancePlan.all, :id, :name do |b| %>
+                <div class="field">
+                  <%= b.radio_button %>
+                  <%= b.label %><br/>
+                  <p><%= b.object.description %></p>
+                </div>
+              <% end %>
+            <% end %>
+          </div>
+        </div>
+        <div class="tab-pane" id="6b">
+          <div>
+            <%= f.radio_button :blocked_status, "un_blocked" %>
+            <%= label_tag "User Enabled. (can log in)" %><br/>
+            <%= f.radio_button :blocked_status, "blocked" %>
+            <%= label_tag "User Disabled. (cannot log in)" %><br/>
+            <%= f.fields_for :finance do |f_finance| %>
+              <div class="field form-group">
+                <%= f_finance.label :account_number %><br />
+                <%= f_finance.text_field :account_number, class: "form-control" %>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+      <div class="actions">
+        <%= f.submit "Update", class: "btn btn-success" %>
+        <%= link_to "Back", :back, class: "btn btn-default" %>
+      </div>
+    <% end %>
+  </div>

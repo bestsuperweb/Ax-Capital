@@ -1,0 +1,26 @@
+<div class="row">
+  <div class="col-md-2"></div>
+  <div class="col-md-8">
+
+    <h2 align="center">FAQ</h2>
+
+    <div class="panel-group" id="accordion">
+      <% get_faq('public/faq.yml').each do |faq| %>
+        <div class="panel panel-primary">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" data-parent="#accordion" href=<%="#collapse#{faq[:index]}" %>>
+                <%= faq['question'] %>
+              </a>
+            </h4>
+          </div>
+          <div id=<%="collapse#{faq[:index]}" %> class="panel-collapse collapse in">
+            <div class="panel-body">
+              <%= faq['answer'] %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+
+</div>

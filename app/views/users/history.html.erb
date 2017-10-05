@@ -1,0 +1,30 @@
+<div class="row">
+  <div class="col-md-1"></div>
+  <div class="col-md-9">
+    <h2 align="center">Transaction History</h2>
+    <table class="table table-striped table-condensed table-responsive">
+      <thead>
+        <tr>
+          <th>Transaction</th>
+          <th>Created Date</th>
+          <th>Amount</th>
+          <th>Status</th>
+          <th>Previous Balance</th>
+          <th>New Balance</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @transactions.each do |transaction| %>
+          <tr>
+            <td><%= transaction_type(transaction.mode) %></td>
+            <td><%= format_date(transaction.created_at) %></td>
+            <td><%= transaction.change_value %></td>
+            <td><%= transaction.status %></td>
+            <td align="right"><%= transaction.prev_value %></td>
+            <td align="right"><%= transaction.current_value %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

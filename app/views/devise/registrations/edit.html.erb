@@ -1,0 +1,204 @@
+<div class="row">
+  <div class="col-md-3"></div>
+  <div class="col-md-6 simple_border">
+    <h2>Edit <%= resource_name.to_s.humanize %> Profile</h2>
+
+    <%= label_tag "Profile Completeness: " %>
+    <div class="progress">
+      <div class="progress-bar progress-bar-success" role="progressbar"
+        style="width:<%= resource.profile_completeness %>%">
+        <%=resource.profile_completeness%>%
+      </div>
+    </div>
+
+    <br/>
+
+    <% unless resource.sms_confirmed_at %>
+      <div>
+        <%= form_tag site_confirm_otp_path, method: :put do %>
+          <div class="field form-group">
+            <%= label_tag "Confirm OTP" %>
+            <%= number_field_tag "otp", "", class: "form-control input-sm" %><br/>
+            <%= submit_tag 'Submit', class: "btn btn-primary" %>
+            <%= link_to 'Resend OTP', site_resend_otp_path, class: "btn btn-warning" %>
+          </div>
+        <% end %>
+      </div>
+      <br/>
+    <% end %>
+
+    <%= form_for(setup_user(resource), as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+      <%= devise_error_messages! %>
+
+      <div class="panel-group" id='accordion'>
+        <div class="panel panel-info">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" data-parent='#accordion' href="#collapse1">General Information</a>
+            </h4>
+          </div>
+          <div id="collapse1" class="panel-collapse collapse in">
+            <div class="panel-body">
+              <%= f.fields_for :gen_info do |f_gen_info| %>
+                <div class="field form-group">
+                  <%= f_gen_info.label :first_name, class: 'required' %><br />
+                  <%= f_gen_info.text_field :first_name, class: "form-control" %>
+                </div>
+
+                <div class="field form-group">
+                  <%= f_gen_info.label :last_name, class: 'required' %><br />
+                  <%= f_gen_info.text_field :last_name, class: "form-control" %>
+                </div>
+
+                <div class="field form-group">
+                  <%= f_gen_info.label :date_of_birth, class: 'required' %><br />
+                  <div class='input-group datetimepicker' id='datetimepicker1'>
+                    <%= f_gen_info.text_field :date_of_birth, placeholder:"YYYY-MM-DD", class: "form-control" %>
+                    <span class="input-group-addon">
+                      <span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                  </div>
+                </div>
+
+                <div class="field form-group">
+                  <%= f_gen_info.check_box :uk_resident, class: 'required' %>
+                  <%= f_gen_info.label "I am a United Kingdom Resident" %>
+                </div>
+              <% end %>
+            </div>
+          </div>
+        </div>
+
+        <div class="panel panel-info">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" data-parent='#accordion' href="#collapse2">Address Information</a>
+            </h4>
+          </div>
+          <div id="collapse2" class="panel-collapse collapse">
+            <div class="panel-body">
+              <%= f.fields_for :address do |f_address| %>
+                <div class="field form-group">
+                  <%= f_address.label :address, class: 'required' %><br />
+                  <%= f_address.text_field :address_line, class: "form-control" %>
+                </div>
+                <div class="field form-group">
+                  <%= f_address.label :city, class: 'required' %><br />
+                  <%= f_address.text_field :city, class: "form-control" %>
+                </div>
+                <div class="field form-group">
+                  <%= f_address.label :state, class: 'required' %><br />
+                  <%= f_address.text_field :state, class: "form-control" %>
+                </div>
+                <div class="field form-group">
+                  <%= f_address.label :zip , class: 'required'%><br />
+                  <%= f_address.text_field :zip, class: "form-control" %>
+                </div>
+              <% end %>
+            </div>
+          </div>
+        </div>
+
+        <div class="panel panel-info">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" data-parent='#accordion' href="#collapse3">Security Information</a>
+            </h4>
+          </div>
+          <div id="collapse3" class="panel-collapse collapse">
+            <div class="panel-body">
+              <%= f.radio_button :security_setting, "security_email" %>
+              <%= f.label "Send security token to email (less secure)" %><br/>
+              <%= f.radio_button :security_setting, "security_mobile" %>
+              <%= f.label "Send security token to mobile (recommended)" %><br/>
+
+              <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+                <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+              <% end %>
+
+              <div class="field form-group">
+                <%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
+                <%= f.password_field :password, autocomplete: "off",
+                  class: "form-control", type: "password", "data-toggle": "password" %>
+                <% if @minimum_password_length %>
+                  <br />
+                  <em><%= @minimum_password_length %> characters minimum</em>
+                <% end %>
+              </div>
+
+              <div class="field form-group">
+                <%= f.label :password_confirmation %><br/>
+                <%= f.password_field :password_confirmation, autocomplete: "off",
+                  class: "form-control", type: "password", "data-toggle": "password" %>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <div class="panel panel-info">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" data-parent='#accordion' href="#collapse4">Plan Information</a>
+            </h4>
+          </div>
+          <div id="collapse4" class="panel-collapse collapse">
+            <div class="panel-body">
+              <%= f.fields_for :finance do |f_finance| %>
+                <%= f_finance.collection_radio_buttons :finance_plan_id, FinancePlan.all, :id, :name do |b| %>
+                  <div class="field">
+                    <%= b.radio_button %>
+                    <%= b.label %><br/>
+                    <p><%= b.object.description %></p>
+                  </div>
+                <% end %>
+              <% end %>
+            </div>
+          </div>
+        </div>
+
+        <div class="panel panel-info">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" data-parent='#accordion' href="#collapse5">Default Information</a>
+            </h4>
+          </div>
+          <div id="collapse5" class="panel-collapse collapse">
+            <div class="panel-body">
+              <div class="field form-group">
+                <%= f.label :mobile %><br />
+                <div class="input-group">
+                  <span class="input-group-addon">
+                    <img height='16px' src='/gb_flag.ico'/>
+                    &nbsp;+44
+                  </span>
+                  <%= f.number_field :mobile, class: "form-control" %>
+                </div>
+              </div>
+              <div class="field form-group">
+                <%= f.label :email %><br />
+                <%= f.email_field :email, class: "form-control" %>
+              </div>
+            </div>
+          </div>
+        </div>
+
+    </div>
+
+      <hr/>
+
+      <div class="visible">
+        <div class="field form-group">
+          <%= f.label :current_password, class: 'required' %> <i>(enter your current password to confirm your changes)</i><br />
+          <%= f.password_field :current_password, autocomplete: "off", class: "form-control" %>
+        </div>
+      </div>
+
+      <div class="actions">
+        <%= f.submit "Update", class: "btn btn-success" %>
+        <%= link_to "Back", :back, class: "btn btn-default" %>
+      </div>
+
+    <% end %>
+  </div>
+</div>

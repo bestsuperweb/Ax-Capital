@@ -1,0 +1,248 @@
+bitbucket account - done
+configure bitbucket & initial push to bitbucket - done
+
+gemfile updates: mongoid, bootstrap, devise - done
+
+heroku account - done
+heroku configure - done
+heroku sample deploy - done
+heroku addons paperclip, mongolab - done
+
+sample home page - done
+integrate bootstrap - done
+
+design models: first stab - done
+- user - done
+- finance embedded in user - done
+- transactions in finance - done
+
+integrate mongoid - done
+integrate devise - done
+integrate cucumber - done
+upload documents trial - done
+
+view basic design - done
+- header - done
+- footer - done
+- favicon - done
+
+story 1 - done
+- registration - phone, email, password - done
+- validation - phone digit, email - done
+- terms and condition in signup page - done
+- password view with eye - done
+- cucumber basic test - done
+- s1: send confirmation code for email - done
+- s1: send verification code for phone - later
+
+story 2 - done
+- confirmable - done
+- confirm email - done
+- confirm verification code for phone - done
+
+story 3 - done
+- create a landing page - done
+- login page decoration - done
+- password view with eye - done
+- link to sign up page - done
+- cucumber basic test - done
+- forgot password lnk in login screen - done
+
+story 4 - done
+- recoverable - done
+- bootstrap view fix for recoverable - done
+- captcha integration - done
+
+story 5 - done
+- collapsible panel integration - done
+- generation information panel: first_name, last_name, date_of_birth, UK Resident - done
+- model gen_info embeds in user - done
+- change controller code to accept data in the form: gen_info - done
+- cucumber basic test - done
+
+story 6 - done
+- address model: address_line, city, state, zip - done
+- add to edit page - done
+- change controller code to accept data in the form: address - done
+- cucumber basic test - done
+
+story 7 - done
+- security setting: email or phone - done
+- add to security setting page radio button - done
+- cucumber basic test - done
+
+story 8 - done
+- model: calculate profile percentage - done
+- display profile percentage in the top of edit profile page - done
+- cucumber basic test - done
+
+story 9 - done
+- mockup of upload files - done
+- menu entry for account documents - done
+- upload/view account documents - done
+- upload avatar files - later
+
+story 10 - done
+- bootstrap header + menu - done
+- menu: home, profile, deposits: [deposit funds, history], withdrawals: [withdraw funds, history] - done
+- home page / landing page: tile design - done
+- avatar tile - done
+- account status tile: profile complete, email validation, mobile validation - done
+- profile info: email, phone, address - done
+- account info: account type, account number, currency - done
+- account financials: balance - done
+- cucumber basic test - done
+- email verification status in home page - done
+- integration with mobile verification - done
+
+story 11 - done
+- my setting menu entry landing on user profile - done
+- cucumber basic test - done
+
+story 12 - done
+- add fund menu entry - done
+- landing page for add fund - done
+- display admin account/contact information to add fund - done
+- create transaction (add fund) with text area for information input - done
+- cucumber basic test - done
+
+story 13 - done
+- create investment plans model - done
+- select investment plan entry in profile - done
+- landing page for selection of investment plan: display info - done
+- ability to update investment plan - done
+- mail change of investment plan to admin - done
+- cucumber basic test - done
+
+story 14 - done
+- withdraw fund menu entry - done
+- landing page for withdraw fund - done
+- all bank details to withdraw money - done
+- accept terms and condition to withdraw money - done
+- cucumber basic test - done
+
+story 15 - done
+- menu entry for deposit history - done
+- landing page for deposit history - done
+- list of all deposit entries - done
+- cucumber basic test - done
+- enable pagination - later
+
+story 16 - done
+- menu entry for withdrawal history - done
+- landing page for withdrawal history - done
+- list of all withdrawal entries - done
+- cucumber basic test - done
+- enable pagination - later
+
+story 17 - done
+- charting prototype - done
+- API to return account value data at different dates (only completed transactions) - done
+- should mark withdraw and deposits in chart - later
+- time range selection - later
+
+story 18 - done
+- footer menu design: Privacy Policy, Risk Disclosure, Preventing money laundering, Contacts, Security Instructions - done
+- footer content page partial - done
+- cucumber basic test - done
+
+story 19 - done
+- contact us: static: address of office, map - done
+- contact us: form: department, subject, body, send email button - done
+- email/form integration - done
+- sendgrid integration - done
+- cucumber basic test - done
+
+story 20 - done
+- admin user management landing page - done
+- user model: enable/disable - done
+- view: list of all users - done
+- view show - done
+- finish edit/update (including password) - done
+- paginate the list of users - later
+- cucumber basic test - later
+
+story 21 - done
+- admin user view: see financial history of any user - done
+- paginate transactions list - later
+- cucumber basic test - later
+
+story 22 - done
+- admin view: add fund : accept / reject transaction, with comment claimed by user - done
+- cucumber basic test - later
+
+story 23 - done
+- admin view: withdraw fund : accept / reject transaction, with comment and transaction details claimed by user - done
+- cucumber basic test - later
+
+story 25 - done
+- sub admin role - done
+- menu entry for updating fund value - done
+- update fund screen - done
+- cucumber basic test - later
+
+general:
+new logo integration - done
+script to check active status of menu - done
+email integration - done
+devise email verification link - done
+add enable / disable user in edit user screen - done
+provision account number for the user - done
+fix calendar control in edit profile 2 places - done
+
+design SMS OTP framework - done
+code SMS OTP framework - done
+integrate S3 account - done
+
+design upload document feature - done
+implement upload document feature - done
+
+home page:
+- empty homepage controller action - done
+- fix menu entries - done
+- logged in/out users have different menu - done
+- other unsigned menu entries - done
+- faq - done
+- about_us - done
+- strategies - done
+- fund_security - done
+- regulations - done
+- homepage content - done, waiting for content
+
+- admin and sub amdin have different menus - done
+
+fix menu for admins and non admins - done
+change string for log in
+
+
+
+
+later:
+new s3 account from aws - not required
+finalize SMS provider for UK
+integrate SMS provider
+cucumber to check specific elements
+cucumber to fill new fields
+cucumber detailed scenarios for user, sub_admin and admin
+
+security model
+transactional integrity
+backup
+full control of server
+new relic integration
+loggings - heroku, rails, puma, mongo
+
+
+----
+heroku account:
+karthikonly
+Q1
+
+bitbucket account:
+karthikonly
+Q1
+
+virtual box image:
+Username: osboxes
+Password: osboxes.org
+

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h2>Hi Administrator,</h2>
+    <h2><%= @user.full_name %> has <%= @verb %> his finance plan.</h2>
+
+    <h4>User Details</h4>
+    <table>
+      <tr>
+        <td>Mobile:</td>
+        <td><%= @user.mobile %></td>
+      </tr>
+      <tr>
+        <td>Email:</td>
+        <td><%= @user.email %></td>
+      </tr>
+    </table>
+
+    <h4>New Plan Details</h4>
+    <table>
+      <tr>
+        <td>Name:</td>
+        <td><%= @new_plan.name %></td>
+      </tr>
+      <tr>
+        <td>Description:</td>
+        <td><%= @new_plan.description %></td>
+      </tr>
+    </table>
+
+    <% if @old_plan %>
+      <h4>Old Plan Details</h4>
+      <table>
+        <tr>
+          <td>Name:</td>
+          <td><%= @old_plan.name %></td>
+        </tr>
+        <tr>
+          <td>Description:</td>
+          <td><%= @old_plan.description %></td>
+        </tr>
+      </table>
+    <% end %>
+
+  </body>
+</html>

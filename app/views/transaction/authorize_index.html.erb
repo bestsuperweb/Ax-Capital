@@ -1,0 +1,35 @@
+<div class="row">
+  <div class="col-md-1"></div>
+  <div class="col-md-9">
+    <h2>Pending Transactions</h2>
+    <table class="table table-striped table-condensed table-responsive">
+      <thead>
+        <tr>
+          <th colspan="3">User Details</th>
+          <th>Initiated Date</th>
+          <th>Account</th>
+          <th>Balance</th>
+          <th>Type</th>
+          <th>Amount</th>
+          <th colspan="2">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @transactions.each do |transaction| %>
+          <tr>
+            <td><%= transaction.user.full_name %></td>
+            <td><%= transaction.user.email %></td>
+            <td><%= transaction.user.mobile %></td>
+            <td><%= format_date(transaction.created_at) %></td>
+            <td><%= transaction.user.finance.account_number %></td>
+            <td><%= transaction.user.finance.balance.to_s %></td>
+            <td><%= transaction_type(transaction.mode) %></td>
+            <td><%= transaction.change_value %></td>
+            <td><%= link_to 'Approve', transaction_authorize_edit_path(transaction), class: "btn btn-xs btn-warning" %></td>
+            <td><%= link_to 'Reject', transaction_authorize_reject_path(transaction), "data-method" => :put, class: "btn btn-xs btn-danger" %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

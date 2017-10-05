@@ -1,0 +1,79 @@
+<div class="row">
+
+  <div class="col-md-12">
+    <h2>Deposit Funds - Bank Wire Transfers</h2>
+    <div class="alert alert-info" role="alert">
+      <p>
+        We cover all transfer fees imposed by our banks, with the exception of deposits amounting to less than 200 GBP (or equivalent denomination).
+      </p>
+    </div>
+    <div class="alert alert-info" role="alert">
+      <p>
+        Please provide your bank with the below payment instructions in order to wire funds to your account.
+      </p>
+    </div>
+
+    <div>
+      <h2>For GBP Accounts</h2>
+      <table class="table table-striped table-condensed table-responsive">
+        <tr>
+          <td>Beneficiary Name</td>
+          <td>Trading Point of Financial Instruments UK Limited</td>
+        </tr>
+        <tr>
+          <td>Beneficiary Address</td>
+          <td>1 Ropemaker Street, CityPoint Building, London EC2Y 9HT, UK</td>
+        </tr>
+        <tr>
+          <td>Bank Name</td>
+          <td>Barclays Bank PLC</td>
+        </tr>
+        <tr>
+          <td>Beneficiary Bank Address</td>
+          <td>1 Churchill Place, Canary Wharf, London E14 HHP, UK</td>
+        </tr>
+        <tr>
+          <td>Swift Code</td>
+          <td>BARCGB22</td>
+        </tr>
+        <tr>
+          <td>IBAN</td>
+          <td>GB20 BARC2047 3543 1566 66</td>
+        </tr>
+      </table>
+    </div>
+
+    <hr/>
+
+    <div class="col-md-6">
+      <div class="alert alert-warning" role="alert">
+        <strong>Before you proceed with a deposit via Bank Wire Transfer, Please note the following:</strong>
+        <br/>
+        Please make sure that all payments are made from an account registered in the same name as your XM account.
+      </div>
+
+      <div class="alert alert-info" role="alert">
+        <strong>Please note the following:</strong>
+        <br/>
+        <b>Important: </b>Your XM account number should be included in the payment details of the transfer.
+      </div>
+    </div>
+
+    <div class="col-md-6 simple_border">
+      <%= form_for(@transaction, url: transaction_deposit_create_path) do |f| %>
+        <div class="field form-group">
+          <%= f.label "Enter the amount you have transferred to your account:" %>
+          <%= f.number_field :change_value, class: "form-control" %>
+        </div>
+        <div class="field form-group">
+          <%= f.label "Additional Notes:" %>
+          <%= f.text_area :user_notes, rows: 3, class: "form-control" %>
+        </div>
+        <div class="actions">
+          <%= f.submit "Submit", class: "btn btn-success" %>
+          <%= link_to "Back", :back, class: "btn btn-default" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

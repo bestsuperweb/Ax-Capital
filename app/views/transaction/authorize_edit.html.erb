@@ -1,0 +1,44 @@
+<div class="row">
+  <div class="col-md-3"></div>
+  <div class="col-md-6">
+    <h2>Authorize Transaction</h2>
+    <%= form_for(@transaction, url: transaction_authorize_approve_path(@transaction), html: {method: :put}) do |f| %>
+      <table class="table table-striped table-responsive">
+        <tbody>
+          <tr>
+            <td>Email</td>
+            <td><%= @transaction.user.email %></td>
+          </tr>
+          <tr>
+            <td>Name</td>
+            <td><%= @transaction.user.full_name %></td>
+          </tr>
+          <tr>
+            <td>Mobile</td>
+            <td><%= @transaction.user.mobile %></td>
+          </tr>
+          <tr>
+            <td>Initiated Date</td>
+            <td><%= format_date(@transaction.created_at) %></td>
+          </tr>
+          <tr>
+            <td>Account Number</td>
+            <td><%= @transaction.user.finance.account_number %></td>
+          </tr>
+          <tr>
+            <td>Amount</td>
+            <td><%= @transaction.change_value %></td>
+          </tr>
+          <tr>
+            <td>Approved Amount</td>
+            <td><%= f.number_field :change_value, class: "form-control" %></td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="actions">
+        <%= f.submit "Approve", class: "btn btn-success" %>
+        <%= link_to "Back", :back, class: "btn btn-default" %>
+      </div>
+    <% end %>
+  </div>
+</div>

@@ -1,0 +1,11 @@
+<p>
+  <strong>Name:</strong>
+  <%= @document.name %>
+</p>
+<p>
+  <strong>File:</strong>
+  <%= link_to @document.attachment, @document.attachment.to_s %>
+</p>
+
+<%= link_to 'Edit', edit_document_path(@document) %> |
+<%= link_to 'Back', documents_path %>

@@ -1,0 +1,132 @@
+<div class="row" align="center">
+  <h3><%= message %><strong><%= current_user.full_name %>!</strong></h3>
+  <!-- TODO avatar -->
+</div>
+<div class="row">
+  <div class="col-md-2"></div>
+  <div class="col-md-4">
+    <h2>Profile Status</h2>
+    <h5>Profile Completeness:</h5>
+    <div class="progress">
+      <div class="progress-bar progress-bar-success" role="progressbar"
+        style="width:<%= current_user.profile_completeness %>%">
+        <%= current_user.profile_completeness %>%
+      </div>
+    </div>
+    <table class="table table-striped table-condensed table-responsive">
+      <tr>
+        <td>
+          <h5>Email Verification</h5>
+        </td>
+        <td align="right">
+          <h4><%= color_status(current_user.confirmed?, "Done", "Not done")%></h4>
+        </td>
+      </tr>
+      <% unless current_user.confirmed? %>
+        <tr>
+          <td colspan="2">
+            <p class="bg-danger">You need to confirm your email within 10 days of creating the account.</p>
+          </td>
+        </tr>
+      <% end %>
+      <tr>
+        <td>
+          <h5>Mobile Verification</h5>
+        </td>
+        <td align="right">
+          <h4><%= color_status(current_user.mobile_verification_complete, "Done", "Not done")%></h4>
+        </td>
+      </tr>
+      <% unless current_user.mobile_verification_complete %>
+        <tr>
+          <td colspan="2">
+            <p class="bg-danger">You need to confirm your mobile number within 7 days of creating the account.</p>
+          </td>
+        </tr>
+      <% end %>
+      <tr>
+        <td>
+          <h5>Account Disabled</h5>
+        </td>
+        <td align="right">
+          <h4><%= blocked_status(current_user.blocked?) %></h4>
+        </td>
+      </tr>
+    </table>
+    <h4>
+  </div>
+
+  <div class="col-md-4">
+    <h2>Account Details</h2>
+    <table class="table table-striped table-condensed table-responsive">
+      <tr>
+        <td><h5>Email</h5></td>
+        <td align="right"><h5><b>&nbsp;<%= current_user.email %></b></h5></td>
+      </tr>
+      <tr>
+        <td><h5>Mobile</h5></td>
+        <td align="right"><h5><b>&nbsp;<%= current_user.mobile %></b></h5></td>
+      </tr>
+      <tr>
+        <td><h5>Address</h5></td>
+        <td align="right"><h5><b>&nbsp;<%= current_user.address.try(:address_line) %></b></h5></td>
+      </tr>
+      <tr>
+        <td>&nbsp;</td>
+        <td align="right"><h5><b>&nbsp;<%= current_user.address.try(:address_line2) %></b></h5></td>
+      </tr>
+    </table>
+  </div>
+
+</div>
+
+<div class="row">
+  <div class="col-md-2"></div>
+
+  <div class="col-md-4">
+    <h2>Account Information</h2>
+    <table class="table table-striped table-condensed table-responsive">
+      <tr>
+        <td><h5>Account Type</h5></td>
+        <td align="right">
+          <h5>
+            <b>
+              &nbsp;<%= current_user.finance.finance_plan.try(:name) %>
+            </b>
+          </h5>
+        </td>
+      </tr>
+      <tr>
+        <td><h5>Account Number</h5></td>
+        <td align="right">
+          <h5>
+            <b>
+              &nbsp;<%= current_user.finance.account_number %>
+            </b>
+          </h5>
+        </td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="col-md-4">
+    <h2>Financials</h2>
+    <table class="table table-striped table-condensed table-responsive">
+      <tr>
+        <td><h5>Account Balance </h5></td>
+        <td align="right">
+          <h5>
+            &nbsp;
+            <%= current_user.finance.balance.currency.symbol %>
+            <b><%= current_user.finance.balance %></b>
+          </h5>
+        </td>
+      </tr>
+      <tr>
+        <td><h5>Base Currency</h5></td>
+        <td align="right"><h5><b><%= current_user.finance.balance.currency.name %> </b></h5></td>
+      </tr>
+    </table>
+  </div>
+
+</div>

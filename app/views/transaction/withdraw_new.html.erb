@@ -1,0 +1,117 @@
+<div class="row">
+
+  <div class="col-md-12">
+    <h2>Withdraw Funds - Bank Wire Transfer</h2>
+    <div class="well">
+      In order to protect all parties against fraud and minimise the possibility of money laundereing and/or terrorist financing, XM will only process withdrawal back to the source of the original deposit according to the <strong>Withdrawal Priority Procedure.</strong>
+    </div>
+    <div class="well">
+      Please complete the form below to request a withdrawal. XM will contact you if any further information is required. Kindly note that this is a request for withdrawal and not an automated function. The payment will be completed within 2-5 working days.
+    </div>
+    <div class="alert alert-warning" role="alert">
+      <strong>Attention</strong><br/>
+      Please use only English alphabet characters.<br/>
+      XM only covers bank fees on its own side with the exception of withdrawals amounting to less than 200 GBP (or equivalent denomination).
+      </p>
+    </div>
+
+    <hr/>
+
+    <div>
+      <%= form_for(setup_transaction(@transaction), url: transaction_withdraw_create_path) do |f| %>
+
+        <div>
+          <%= f.fields_for :bank_detail do |f_bank_detail| %>
+
+            <div class="col-md-4">
+              <ul class="list-group">
+                <li class="list-group-item"><strong>XM Account ID: </strong><%= current_user.finance.account_number %></li>
+                <li class="list-group-item"><strong>XM Account Name: </strong><%= current_user.full_name %></li>
+              </ul>
+              <div class="field form-group">
+                <%= f_bank_detail.label :full_name %><br />
+                <%= f_bank_detail.text_field :full_name, class: "form-control" %>
+              </div>
+              <div class="field form-group">
+                <%= f_bank_detail.label :address %><br />
+                <%= f_bank_detail.text_field :address, class: "form-control" %>
+              </div>
+              <div class="field form-group">
+                <%= f_bank_detail.label :account %><br />
+                <%= f_bank_detail.text_field :account, class: "form-control" %>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="field form-group">
+                <%= f_bank_detail.label :bank_name %><br />
+                <%= f_bank_detail.text_field :bank_name, class: "form-control" %>
+              </div>
+              <div class="field form-group">
+                <%= f_bank_detail.label :swift_code %><br />
+                <%= f_bank_detail.text_field :swift_code, class: "form-control" %>
+              </div>
+              <div class="field form-group">
+                <%= f_bank_detail.label :bank_address %><br />
+                <%= f_bank_detail.text_field :bank_address, class: "form-control" %>
+              </div>
+              <div class="field form-group">
+                <%= f_bank_detail.label :branch_name %><br />
+                <%= f_bank_detail.text_field :branch_name, class: "form-control" %>
+              </div>
+              <div class="field form-group">
+                <%= f_bank_detail.label :branch_code %><br />
+                <%= f_bank_detail.text_field :branch_code, class: "form-control" %>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="field form-group">
+                <%= f_bank_detail.label :inter_swift_code %><br />
+                <%= f_bank_detail.text_field :inter_swift_code, class: "form-control" %>
+              </div>
+              <div class="field form-group">
+                <%= f_bank_detail.label :inter_bank_name %><br />
+                <%= f_bank_detail.text_field :inter_bank_name, class: "form-control" %>
+              </div>
+              <div class="field form-group">
+                <%= f_bank_detail.label :inter_bank_address %><br />
+                <%= f_bank_detail.text_field :inter_bank_address, class: "form-control" %>
+              </div>
+            </div>
+
+          <% end %>
+        </div>
+
+        <div class="col-md-7">
+          <h3>Terms &amp; Conditions</h3>
+          <div style="height: 300px; overflow: auto" class="simple_border">
+            <p>
+              <%= get_content('public/terms_of_service.html') %>
+            </p>
+          </div>
+          <div class="field form-group" style="margin-top: 10px">
+            <%= f.check_box :accept_terms_and_conditions %>
+            <%= f.label :accept_terms_and_conditions %>
+          </div>
+        </div>
+
+        <div class="col-md-5 simple_border">
+          <br/>
+          <div class="field form-group">
+            <%= f.label "Enter the amount you want to withdraw from your account:" %>
+            <%= f.number_field :change_value, class: "form-control" %>
+          </div>
+          <div class="field form-group">
+            <%= f.label "Additional Notes:" %>
+            <%= f.text_area :user_notes, rows:3, class: "form-control" %>
+          </div>
+          <div class="actions">
+            <%= f.submit "Submit", class: "btn btn-success" %>
+            <%= link_to "Back", :back, class: "btn btn-default" %>
+          </div>
+        </div>
+
+      <% end %>
+    </div>
+
+  </div>
+</div>
