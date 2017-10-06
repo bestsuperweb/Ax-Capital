@@ -64,12 +64,11 @@ class User
   end
 
   ## validations
-  validates_presence_of       :mobile
-  validates_uniqueness_of     :email, :mobile, case_sensitive: false
+  validates :password_confirmation, presence: true
 
-  validates :mobile, length: { in: 9..10 }
+  validates :mobile, presence: true
 
-
+  validates :mobile, numericality: { only_integer: true }, length: { in: 9..10 }, unless: Proc.new { |a| a.mobile.blank? }
 
   validates :accept_terms_of_service, acceptance: true
 

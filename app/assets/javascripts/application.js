@@ -18,3 +18,19 @@
 //= require moment
 //= require bootstrap-datetimepicker
 //= require_tree .
+
+jQuery(document).ready(function($) {
+	$('#error_explanation ul li:contains("Password confirmation")').each(function(){
+		var html = $(this).html();
+		html = html.replace("Password confirmation", "Confirm Password");
+		$(this).html(html);
+	});
+
+	$('#error_explanation ul li:contains("-")').each(function(){
+		var html = $(this).html();
+		var str  = html.split('-')[0] + '-';
+		html = html.replace(str, " ");
+		$(this).html(html);
+	});
+	
+});
